@@ -14,29 +14,40 @@ def organize_folder(target_path):
         "Design": [".psd", ".ai", ".xd", ".sketch", ".af"]
     }
 
-    # Change the current working directory to the target path
-    os.chdir(target_path)
+    try:
+        os.chdir(target_path)
+    except FileNotFoundError:
+        print("Error: The specified directory does not exist.")
+        return
 
     for file in os.listdir():
-        # Skip directories, we only want to move files
         if os.path.isdir(file):
             continue
 
-        # Get the file extension
         name, extension = os.path.splitext(file)
         extension = extension.lower()
 
-        # Check which category the extension belongs to
+        # Determine destination folder
+        dest_folder = "Misc" # Default folder for unknown types
         for folder, extensions in file_types.items():
             if extension in extensions:
-                # Create the folder if it doesn't exist
-                if not os.path.exists(folder):
-                    os.makedirs(folder)
-                
-                # Move the file
-                shutil.move(file, os.path.join(folder, file))
-                print(f"Moved: {file} -> {folder}/")
+                dest_folder = folder
                 break
+
+        # Attempt to move the file
+        try:
+            if not os.path.exists(dest_folder):
+                os.makedirs(dest_folder)
+            
+            shutil.move(file, os.path.join(dest_folder, file))
+            print(f"✅ Moved: {file} -> {dest_folder}/")
+
+        except shutil.Error:
+            print(f"⚠️  Skipped: {file} already exists in {dest_folder}/")
+        except PermissionError:
+            print(f"❌ Error: Permission denied. Is '{file}' currently open?")
+        except Exception as e:
+            print(f"❗ An unexpected error occurred with {file}: {e}")
 
 if __name__ == "__main__":
     # Replace this with the path to the folder you want to organize
