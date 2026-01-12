@@ -14,40 +14,52 @@ def organize_folder(target_path):
         "Design": [".psd", ".ai", ".xd", ".sketch", ".af"]
     }
 
+    # Define the names of folders the script creates so it doesn't move them!
+    protected_folders = list(file_types.keys()) + ["Misc", "Sorted_Folders"]
+
     try:
         os.chdir(target_path)
     except FileNotFoundError:
         print("Error: The specified directory does not exist.")
         return
 
-    for file in os.listdir():
-        if os.path.isdir(file):
-            continue
+    for item in os.listdir():
+        # --- FOLDER LOGIC ---
+        if os.path.isdir(item):
+            # Skip if it's one of our organization folders
+            if item in protected_folders:
+                continue
+            
+            try:
+                if not os.path.exists("Sorted_Folders"):
+                    os.makedirs("Sorted_Folders")
+                
+                shutil.move(item, os.path.join("Sorted_Folders", item))
+                print(f"📂 Moved Folder: {item} -> Sorted_Folders/")
+            except Exception as e:
+                print(f"❌ Could not move folder {item}: {e}")
+            continue # Move to next item
 
-        name, extension = os.path.splitext(file)
+        # --- FILE LOGIC ---
+        name, extension = os.path.splitext(item)
         extension = extension.lower()
 
-        # Determine destination folder
-        dest_folder = "Misc" # Default folder for unknown types
+        dest_folder = "Misc"
         for folder, extensions in file_types.items():
             if extension in extensions:
                 dest_folder = folder
                 break
 
-        # Attempt to move the file
         try:
             if not os.path.exists(dest_folder):
                 os.makedirs(dest_folder)
             
-            shutil.move(file, os.path.join(dest_folder, file))
-            print(f"✅ Moved: {file} -> {dest_folder}/")
-
+            shutil.move(item, os.path.join(dest_folder, item))
+            print(f"📄 Moved File: {item} -> {dest_folder}/")
         except shutil.Error:
-            print(f"⚠️  Skipped: {file} already exists in {dest_folder}/")
-        except PermissionError:
-            print(f"❌ Error: Permission denied. Is '{file}' currently open?")
+            print(f"⚠️  Skipped: {item} already exists.")
         except Exception as e:
-            print(f"❗ An unexpected error occurred with {file}: {e}")
+            print(f"❗ Error with {item}: {e}")
 
 if __name__ == "__main__":
     # Replace this with the path to the folder you want to organize
