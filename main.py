@@ -9,7 +9,8 @@ def organize_folder(target_path):
         "Audio": [".mp3", ".wav", ".aac", ".flac"],
         "Video": [".mp4", ".mov", ".avi", ".mkv"],
         "Archives": [".zip", ".tar", ".rar", ".7z"],
-        "Scripts": [".py", ".js", ".html", ".css", ".cpp"]
+        "Scripts": [".py", ".js", ".html", ".css", ".cpp"],
+        "Software": [".exe", ".msi", ".dmg", ".apk"]
     }
 
     # Change the current working directory to the target path
