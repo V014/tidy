@@ -1,6 +1,8 @@
 import os
 import shutil
-import ttkbootstrap
+import tkinter as tk
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 
 def organize_folder(target_path):
     # Dictionary mapping folder names to their associated extensions
