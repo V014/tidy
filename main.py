@@ -4,7 +4,7 @@ import shutil
 def organize_folder(target_path):
     # Dictionary mapping folder names to their associated extensions
     file_types = {
-        "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"],
+        "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg", ".avif"],
         "Documents": [".pdf", ".docx", ".txt", ".xlsx", ".pptx", ".csv"],
         "Audio": [".mp3", ".wav", ".aac", ".flac"],
         "Video": [".mp4", ".mov", ".avi", ".mkv"],
