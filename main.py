@@ -51,5 +51,6 @@ def organize_folder(target_path):
 
 if __name__ == "__main__":
     # Replace this with the path to the folder you want to organize
+    print("Digi-Maid: Your Digital Cleaning Assistant")
     path_to_clean = input("Enter the full path of the folder to organize: ")
     organize_folder(path_to_clean)
