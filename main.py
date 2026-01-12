@@ -8,7 +8,7 @@ def organize_folder(target_path):
         "Documents": [".pdf", ".docx", ".txt", ".xlsx", ".pptx", ".csv"],
         "Audio": [".mp3", ".wav", ".aac", ".flac"],
         "Video": [".mp4", ".mov", ".avi", ".mkv"],
-        "Archives": [".zip", ".tar", ".rar", ".7z"],
+        "Archives": [".zip", ".tar", ".rar", ".7z", ".iso"],
         "Scripts": [".py", ".js", ".html", ".css", ".cpp"],
         "Software": [".exe", ".msi", ".dmg", ".apk"]
     }
