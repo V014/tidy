@@ -4,6 +4,15 @@ import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 
+# Initialize the main application window
+root = ttk.Window()
+# Set window title
+root.title("Digi-Maid")
+# Set window size
+root.geometry("400x300")
+# Set window theme
+style = ttk.Style("superhero")
+
 def organize_folder(target_path):
     # Dictionary mapping folder names to their associated extensions
     file_types = {
@@ -69,3 +78,8 @@ if __name__ == "__main__":
     print("Digi-Maid: Your Digital Cleaning Assistant")
     path_to_clean = input("Enter the full path of the folder to organize: ")
     organize_folder(path_to_clean)
+
+
+
+# Start the GUI event loop
+root.mainloop()
