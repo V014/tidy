@@ -4,17 +4,6 @@ import os
 import platform
 import sys
 
-def clear_terminal():
-    # Windows uses 'cls', Mac/Linux use 'clear'
-    command = "cls" if platform.system().lower() == "windows" else "clear"
-    os.system(command)
-
-# To exit without those messy "Traceback" errors:
-def safe_exit():
-    print("\nCleaning up and exiting...")
-    # Add clear_terminal() here if you want a blank screen on exit
-    sys.exit(0)
-
 def organize_folder(target_path):
     # Dictionary mapping folder names to their associated extensions
     file_types = {
